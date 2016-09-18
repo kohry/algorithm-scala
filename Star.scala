@@ -2,7 +2,7 @@
 
 object Star {
   
-    var cache = Array.fill[Boolean](101,101)(false)
+    var cache = Array.fill[Int](101,101)(-1)
   var W:String = ""
   var S:String = ""
   
@@ -10,7 +10,7 @@ object Star {
     def main(args: Array[String]): Unit = {
       W = "******a"
       S = "aaaaaaaaaab"
-      matches3(0,0)
+      println(matches3(0,0))
   }
   
   // 1.when wildcard and string don't match, FAIL
@@ -43,7 +43,7 @@ object Star {
     //YES memoization
   
 
-  def matches3 (w:Int, s:Int):Boolean = {
+  def matches3 (w:Int, s:Int):Int = {
     
     var w2 = w
     var s2 = s
@@ -57,7 +57,7 @@ object Star {
     }
     
     if(w2 == W.size) {
-      cache(w2)(s2) = (s2 == S.size)
+      if (s2 == S.size) cache(w2)(s2) == 1 else 0
       return cache(w2)(s2)
     }
     
@@ -66,15 +66,15 @@ object Star {
     if(W.charAt(w2) == '*'){
       while(skip + s2 <= S.size) {
         skip = skip + 1
-        if(matches3(w2+1, s2+skip)) {
-          cache(w2)(s2) = true
-          return true
+        if(matches3(w2+1, s2+skip) == 1) {
+          cache(w2)(s2) = 1
+          return 1
         }
       }
     }
     
-    cache(w)(s) = false
-    return false
+    cache(w)(s) = 0
+    return 0
     
       
   }
