@@ -6,6 +6,7 @@ object LIS {
     println(lis(Array(3,2,1,7,5,4,2,6)))
   }
 
+  //이걸 array로 받는게 아니라 int로 받아서 동적계획을 할수있도록 해야한다.
   def lis(array: Array[Int]): Int = {
 
     if (array.isEmpty) return 0
